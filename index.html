@@ -27,6 +27,12 @@
                 <div id="root">
 
                 </div>
+                
+                <button class="btn btn-default" id="grow">+</button>
+                <button class="btn btn-default" id="shrink">-</button>
+                
+                <button class="btn btn-default" id="start">start</button>
+                <button class="btn btn-default" id="stop">stop</button>
             </div>
         </div>
     </div>
@@ -35,20 +41,55 @@
     <script type="text/javascript">
         var div = React.DOM.div;
         var crt = React.createElement;
-        
-        var course = div({id:"kurs", className:"media border"},
+        var font_size = 3;
+        var progress = 22;
+        var course = function(){
+           return div({id:"kurs", className:"media border"},
                          div({className: 'media-left'},
                              React.createElement('img',{className:"media-object", alt:"Miniaturka kursu", src:"http://lorempixel.com/200/200/"})
                              ),
                
                          
             div({className:"media-body"},
-                crt("h3", {className:"media-heading"}, "Kurs React"),
-                crt("p", {}, "React od podstaw")
+                crt("h3", {className:"media-heading", style:{ fontSize: font_size + 'em', backgroundColor:"#999"}}, 'Kurs React'),
+                crt("p", {style:{fontSize: font_size/2 + 'em'}}, "React od podstaw"),
+                "Ładowanie...",
+                div({className:"progress"},
+                   div({className:'progress-bar progress-bar-success progress-bar-striped active', style:{width: progress + "%"}}), crt("span",{},progress + '%'))
                 )
         )
+        }
+        
+        
+        
+//        JS skrypty 
+        document.getElementById("grow").addEventListener("click", function(){
+            font_size = font_size + 1;
+            render()
+        })
 
-        ReactDOM.render(course, document.getElementById('root'))
+        document.getElementById("shrink").addEventListener("click", function(){
+            font_size = font_size === 1? font_size : (font_size - 1); 
+            render()
+        })
+        
+        var interval;
+        document.getElementById("start").addEventListener("click", function(){
+            interval = setInterval(function(){
+                progress = progress + 1;
+                 render()
+            },300)
+        })
+
+        document.getElementById("stop").addEventListener("click", function(){
+            clearInterval(interval)
+            render()
+        })
+        
+        function render(){
+        ReactDOM.render(course(), document.getElementById('root'))
+        }
+        render()
     </script>
 </body>
 
