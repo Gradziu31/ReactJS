@@ -12,14 +12,19 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.js"></script>
 </head>
-
+<style>
+    .border{
+        border: 1px solid #e8e8e8;
+        padding: 10px;
+    }
+</style>
 <body>
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <h1>Witaj w EduWeb!</h1>
 
-                <div id="kurs">
+                <div id="root">
 
                 </div>
             </div>
@@ -27,13 +32,23 @@
     </div>
 
 
-    <script>
-        var div = React.createElement("div", {},
-            React.createElement("h3", {}, "Kurs React"),
-            React.createElement("p", {}, "React od podstaw")
+    <script type="text/javascript">
+        var div = React.DOM.div;
+        var crt = React.createElement;
+        
+        var course = div({id:"kurs", className:"media border"},
+                         div({className: 'media-left'},
+                             React.createElement('img',{className:"media-object", alt:"Miniaturka kursu", src:"http://lorempixel.com/200/200/"})
+                             ),
+               
+                         
+            div({className:"media-body"},
+                crt("h3", {className:"media-heading"}, "Kurs React"),
+                crt("p", {}, "React od podstaw")
+                )
         )
 
-        ReactDOM.render(div, document.getElementById('kurs'))
+        ReactDOM.render(course, document.getElementById('root'))
     </script>
 </body>
 
