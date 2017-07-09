@@ -33,26 +33,31 @@
                 
                 <button class="btn btn-default" id="start">start</button>
                 <button class="btn btn-default" id="stop">stop</button>
+                
+                <button class="btn btn-default" id="prev">prev</button>
+                <button class="btn btn-default" id="next">next</button>
             </div>
         </div>
     </div>
 
-
+    <script src="courses_data.js"></script>
     <script type="text/javascript">
         var div = React.DOM.div;
         var crt = React.createElement;
         var font_size = 3;
         var progress = 22;
-        var course = function(){
+        var index = 0;
+        var data = courses_data[index];
+        var course = function(data){
            return div({id:"kurs", className:"media border"},
                          div({className: 'media-left'},
-                             React.createElement('img',{className:"media-object", alt:"Miniaturka kursu", src:"http://lorempixel.com/200/200/"})
+                             React.createElement('img',{className:"media-object", alt:"Miniaturka kursu", src: data.image})
                              ),
                
                          
             div({className:"media-body"},
-                crt("h3", {className:"media-heading", style:{ fontSize: font_size + 'em', backgroundColor:"#999"}}, 'Kurs React'),
-                crt("p", {style:{fontSize: font_size/2 + 'em'}}, "React od podstaw"),
+                crt("h3", {className:"media-heading", style:{ fontSize: font_size + 'em', backgroundColor:"#999"}}, data.title),
+                crt("p", {style:{fontSize: font_size/2 + 'em'}}, data.description),
                 "Ładowanie...",
                 div({className:"progress"},
                    div({className:'progress-bar progress-bar-success progress-bar-striped active', style:{width: progress + "%"}}), crt("span",{},progress + '%'))
@@ -86,8 +91,25 @@
             render()
         })
         
+        
+        
+        
+        document.getElementById("prev").addEventListener("click", function(){
+            index = index === 0? 0: (index - 1);
+            render()
+        })
+
+        document.getElementById("next").addEventListener("click", function(){
+            index = index+1;
+            render()
+        })
+        
+        
+        
+        
         function render(){
-        ReactDOM.render(course(), document.getElementById('root'))
+        data = courses_data[index]
+        ReactDOM.render(course(data), document.getElementById('root'))
         }
         render()
     </script>
