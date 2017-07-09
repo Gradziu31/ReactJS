@@ -49,6 +49,9 @@
         var index = 0;
         var data = courses_data[index];
         var course = function(data){
+            
+        var isNew = data.is_new? crt("p", {style:{fontSize: font_size/2 + 'em', fontWeight:'bolder'}}, "Nowość!") : null;
+            
            return div({id:"kurs", className:"media border"},
                          div({className: 'media-left'},
                              React.createElement('img',{className:"media-object", alt:"Miniaturka kursu", src: data.image})
@@ -58,6 +61,8 @@
             div({className:"media-body"},
                 crt("h3", {className:"media-heading", style:{ fontSize: font_size + 'em', backgroundColor:"#999"}}, data.title),
                 crt("p", {style:{fontSize: font_size/2 + 'em'}}, data.description),
+                isNew,
+                data.is_promo? crt("p", {style:{fontSize: font_size/2 + 'em', fontWeight:'bolder'}}, "Promocja!") : null,
                 "Ładowanie...",
                 div({className:"progress"},
                    div({className:'progress-bar progress-bar-success progress-bar-striped active', style:{width: progress + "%"}}), crt("span",{},progress + '%'))
