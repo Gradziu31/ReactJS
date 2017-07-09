@@ -11,12 +11,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.js"></script> 
 </head>
 <style>
     .border{
         border: 1px solid #e8e8e8;
         padding: 10px;
+        margin-top: 10px!important;
     }
 </style>
 <body>
@@ -30,21 +31,7 @@
         </div>
     </div>
     <script src="courses_data.js"></script>
-    <script type="text/babel">
-        var course = (
-            <div className="media">
-            <div className="media-left">
-                <img src="http://lorempixel.com/300/300/" alt="cover" />
-            </div>
-            <div className="media-body">
-                <h3>Temat Kursu</h3>
-                <p>Opis kursu...</p>
-            </div>
-        </div>
-            )
-        
-        ReactDOM.render(course, document.getElementById('root'))
-    </script>
-</body>
+    <script src='app.jsx' type="text/babel"></script>
+</body> 
 
 </html>
