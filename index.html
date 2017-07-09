@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.js"></script>
 </head>
 <style>
     .border{
@@ -22,101 +23,27 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h1>Witaj w EduWeb!</h1>
-
                 <div id="root">
 
                 </div>
-                
-                <button class="btn btn-default" id="grow">+</button>
-                <button class="btn btn-default" id="shrink">-</button>
-                
-                <button class="btn btn-default" id="start">start</button>
-                <button class="btn btn-default" id="stop">stop</button>
-                
-                <button class="btn btn-default" id="prev">prev</button>
-                <button class="btn btn-default" id="next">next</button>
             </div>
         </div>
     </div>
-
     <script src="courses_data.js"></script>
-    <script type="text/javascript">
-        var div = React.DOM.div;
-        var crt = React.createElement;
-        var font_size = 3;
-        var progress = 22;
-        var index = 0;
-        var data = courses_data[index];
-        var course = function(data){
-            
-        var isNew = data.is_new? crt("p", {style:{fontSize: font_size/2 + 'em', fontWeight:'bolder'}}, "Nowość!") : null;
-            
-           return div({id:"kurs", className:"media border"},
-                         div({className: 'media-left'},
-                             React.createElement('img',{className:"media-object", alt:"Miniaturka kursu", src: data.image})
-                             ),
-               
-                         
-            div({className:"media-body"},
-                crt("h3", {className:"media-heading", style:{ fontSize: font_size + 'em', backgroundColor:"#999"}}, data.title),
-                crt("p", {style:{fontSize: font_size/2 + 'em'}}, data.description),
-                isNew,
-                data.is_promo? crt("p", {style:{fontSize: font_size/2 + 'em', fontWeight:'bolder'}}, "Promocja!") : null,
-                "Ładowanie...",
-                div({className:"progress"},
-                   div({className:'progress-bar progress-bar-success progress-bar-striped active', style:{width: progress + "%"}}), crt("span",{},progress + '%'))
-                )
-        )
-        }
+    <script type="text/babel">
+        var course = (
+            <div className="media">
+            <div className="media-left">
+                <img src="http://lorempixel.com/300/300/" alt="cover" />
+            </div>
+            <div className="media-body">
+                <h3>Temat Kursu</h3>
+                <p>Opis kursu...</p>
+            </div>
+        </div>
+            )
         
-        
-        
-//        JS skrypty 
-        document.getElementById("grow").addEventListener("click", function(){
-            font_size = font_size + 1;
-            render()
-        })
-
-        document.getElementById("shrink").addEventListener("click", function(){
-            font_size = font_size === 1? font_size : (font_size - 1); 
-            render()
-        })
-        
-        var interval;
-        document.getElementById("start").addEventListener("click", function(){
-            interval = setInterval(function(){
-                progress = progress + 1;
-                 render()
-            },300)
-        })
-
-        document.getElementById("stop").addEventListener("click", function(){
-            clearInterval(interval)
-            render()
-        })
-        
-        
-        
-        
-        document.getElementById("prev").addEventListener("click", function(){
-            index = index === 0? 0: (index - 1);
-            render()
-        })
-
-        document.getElementById("next").addEventListener("click", function(){
-            index = index+1;
-            render()
-        })
-        
-        
-        
-        
-        function render(){
-        data = courses_data[index]
-        ReactDOM.render(course(data), document.getElementById('root'))
-        }
-        render()
+        ReactDOM.render(course, document.getElementById('root'))
     </script>
 </body>
 
